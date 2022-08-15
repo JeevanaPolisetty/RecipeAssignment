@@ -135,6 +135,8 @@ public class RecipeServiceImpl implements RecipeService{
 		
 		//Converting the stream back to list 
 		List<RecipeDto> finalList=filteredList.collect(Collectors.toList());
+		if(finalList.isEmpty())
+			throw new RecipeException("Service.SEARCH_RECIPE_NOT_FOUND");
 		return finalList;
 	}
 	
