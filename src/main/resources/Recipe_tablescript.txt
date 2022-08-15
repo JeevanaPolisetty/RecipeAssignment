@@ -1,0 +1,183 @@
+drop database if exists recipe_db;
+
+create database recipe_db;
+
+use  recipe_db;
+
+create table recipe(
+
+   recipe_no int auto_increment,
+
+   recipe_name varchar(50),
+
+   recipe_type varchar(20)NOT NULL,
+
+   no_of_servings int,
+
+   ingredients varchar(1000),
+
+   instructions varchar(1000),
+
+   constraint ps_cust_id_pk primary key (recipe_no)
+
+);
+
+
+insert into recipe (recipe_no, recipe_name, recipe_type, no_of_servings, ingredients, instructions ) values (
+
+1,
+
+'Mac n cheese',
+
+'VEG',
+
+1                              ,
+
+'Box elbow macaroni,
+Butter,
+All-purpose flour,
+Teaspoon salt,
+Ground black pepper,
+Milk,
+Shredded Cheddar cheese',
+
+'Bring a large pot of lightly salted water to a boil.
+Cook elbow macaroni in the boiling water, stirring occasionally until cooked through but firm to the bite, 8 minutes. Drain.
+Melt butter in a saucepan over medium heat; stir in flour, salt, and pepper until smooth, about 5 minutes. 
+Slowly pour milk into butter-flour mixture while continuously stirring until mixture is smooth and bubbling, about 5 minutes. 
+Add Cheddar cheese to milk mixture and stir until cheese is melted, 2 to 4 minutes.
+Fold macaroni into cheese sauce until coated.'
+
+);
+
+insert into recipe (recipe_no, recipe_name, recipe_type, no_of_servings, ingredients, instructions ) values (
+
+2,
+
+'Pasta',
+
+'VEG',
+
+2                              ,
+
+'Pasta,
+Pasta Sauce,
+Water,
+Salt',
+
+'Use a large pot.Load up the pot with lots of water.
+Salt the water.Bring the water to a full, rolling boil.
+Stir to keep the pasta from sticking.
+Test the pasta two minutes before it is ready.
+Save a scoop of pasta water.
+Drain, toss with sauce, and serve hot.'
+
+);
+commit;
+
+insert into recipe (recipe_no, recipe_name, recipe_type, no_of_servings, ingredients, instructions ) values (
+
+3,
+
+'Lasagna',
+
+'NON_VEG',
+
+4                              ,
+
+'Lasagna noodles uncooked,
+Mozzarella cheese,Parmesan cheese,Ricotta cheese,
+Tomato Sauce,Pasta Sauce,
+Ground beef,
+Italian sausage,
+Italian seasoning,
+Onion,Garlic,
+Parsley,Egg',
+
+'Heat oven to 350°F. Cook pasta according to directions. Rinse under cold water and set aside.
+Brown beef, sausage, onion and garlic over medium high heat until no pink remains. Drain any fat.
+Stir in pasta sauce, tomato paste, Italian seasoning. Simmer 5 minutes.
+Make Cheese Mixture by combining 1 ½ cups mozzarella, ¼ cup parmesan cheese, ricotta, parsley, and egg.
+Add 1 cup meat sauce to a pan.Top with 3 lasagna noodles.
+Layer with ⅓ of the Cheese Mixture and 1 cup of meat sauce.
+Repeat twice more.Finish with 3 noodles topped with remaining sauce.
+Cover with foil and bake 45 minutes. Uncover, sprinkle with remaining cheese (2 ½ cups mozzarella cheese and ¼ cup parmesan).
+And bake an additional 15 minutes or until browned and bubbly. Broil 2-3 minutes if desired.
+Rest 10-15 minutes before cutting.'
+
+);
+
+insert into recipe (recipe_no, recipe_name, recipe_type, no_of_servings, ingredients, instructions ) values (
+
+4,
+
+'Ravioli',
+
+'VEG',
+
+2    ,
+
+'All-purpose flour,
+Sea salt,
+Eggs,
+Olive oil,
+Ravioli filling of your choice',
+
+'In a large bowl whisk together the flour and salt.Add in the eggs.
+Mix them together. Add the olive oil and knead the dough for 5 minutes. Form into a ball and leave 
+in the bowl, covered for 30 minutes.Take a small piece of the dough and either run it through a pasta machine 
+a few times OR use a rolling pin, some flour and a considerable amount of muscle to create a thin sheet. Cut circles out of the 
+dough .Place 1 teaspoon of filling in the center of half the circles. Lightly brush egg wash around the edge of the circle. 
+Place the second circle on top over the filling and use a fork to crimp the edges all around.
+Take a large pot of salted water to a boil. Add ravioli and cook for 2-3 minutes. Once they float to the top it is done.
+Drain pasta and toss with olive oil or sauce.'
+
+);
+
+insert into recipe (recipe_no, recipe_name, recipe_type, no_of_servings, ingredients, instructions ) values (
+
+5,
+
+'Pizza',
+
+'VEG',
+
+4                              ,
+
+'Flour, Salt, Sugar, Fast rise yeast, Water, Oil, Tomato sauce, Italian seasoning, Garlic powder, Salt, Pepper, 
+Pepperoni slices, Mozzarella cheese, Monterey jack cheese, Parmesan cheese',
+
+'In large bowl, mix first 4 ingredients.Mix water and oil, add to flour mixture.
+Turn onto floured surface; knead for 2 minutes.Place in a greased bowl, turning to grease top.
+Cover and let rise for 20 minutes.Punch down, place on 12in, greased pizza pan.
+Pat into a circle.For Topping mix first 5 ingredients and spread over crust.
+Put a few pepperoni slices on top of sauce.
+Sprinkle with 1/2 the mozzeralla, 1/2 the monterey jack, and 1/2 the parmesan.
+Put the rest of the pepperoni on.Repeat the cheese layer.
+Bake at 400 degrees for 20 minutes or until light brown.'
+
+);
+
+insert into recipe (recipe_no, recipe_name, recipe_type, no_of_servings, ingredients, instructions ) values (
+
+6,
+
+'Chocolate mousse',
+
+'VEG',
+
+1                              ,
+
+'Eggs, Sugar, Cream, Chocolate, Butter',
+
+'Beat egg whites and sugar until foamy. 
+It should be foamy but have SOFT peaks that flop at the top not standing upright. 
+Whip cream.Fold together cream and egg yolks.Fold in melted chocolate. 
+Fold egg whites into chocolate mixture. Don’t beat furiously that is the sure fire way to a pot of liquid chocolate. 
+Spoon into individual pots or a larger dish, chill until firm.'
+
+);
+
+commit;
+
+select * from recipe;
