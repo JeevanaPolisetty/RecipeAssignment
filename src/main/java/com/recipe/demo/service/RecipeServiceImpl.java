@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.recipe.demo.Enum.TypeEnum;
+import com.recipe.demo.recipeTypeEnum.TypeEnum;
 import com.recipe.demo.dto.RecipeDto;
 import com.recipe.demo.dto.SearchDto;
 import com.recipe.demo.entity.Recipe;
@@ -23,7 +23,7 @@ import com.recipe.demo.repository.RecipeRepository;
 public class RecipeServiceImpl implements RecipeService{
 
 	@Autowired
-	private RecipeRepository recipeRepository;
+	RecipeRepository recipeRepository;
 	
 	//Read all 
 	@Override
@@ -101,6 +101,7 @@ public class RecipeServiceImpl implements RecipeService{
 			setFields(r, recipe1);
 			recipes.add(recipe1);
 		});
+		//Converting list to stream
 		Stream<RecipeDto> filteredList=recipes.stream();
 		
 		//To filter based on vegetarian or non vegetarian
@@ -108,13 +109,11 @@ public class RecipeServiceImpl implements RecipeService{
 		{
 			filteredList=filteredList.filter(x->x.getRecipeType().name().equalsIgnoreCase((recipe.getRecipeType()).name()));
 		}
-		
 		//To filter based on number of servings
 		if(recipe.getNoOfServings()>0)
 		{
 			filteredList=filteredList.filter(x->x.getNoOfServings()==(recipe.getNoOfServings()));
 		}
-		
 		//To filter based on specific ingredients included or excluded
 		if(recipe.getIngredients()!=null)
 		{
@@ -123,7 +122,6 @@ public class RecipeServiceImpl implements RecipeService{
 			else
 				filteredList=filteredList.filter(x->!((x.getIngredients().toLowerCase()).contains(recipe.getIngredients().toLowerCase())));	
 		}
-		
 		//To filter based on instructions included or excluded
 		if(recipe.getInstructions()!=null) 
 		{

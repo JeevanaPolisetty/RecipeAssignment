@@ -1,4 +1,4 @@
-package com.recipe.demo.Enum;
+package com.recipe.demo.recipeTypeEnum;
 
 public enum TypeEnum {
 

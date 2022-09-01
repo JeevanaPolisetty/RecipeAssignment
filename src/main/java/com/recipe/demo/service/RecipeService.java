@@ -2,7 +2,7 @@ package com.recipe.demo.service;
 
 import java.util.List;
 
-import com.recipe.demo.Enum.TypeEnum;
+import com.recipe.demo.recipeTypeEnum.TypeEnum;
 import com.recipe.demo.dto.RecipeDto;
 import com.recipe.demo.dto.SearchDto;
 import com.recipe.demo.entity.Recipe;

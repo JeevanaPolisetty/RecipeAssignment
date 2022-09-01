@@ -1,7 +1,8 @@
 package com.recipe.demo;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.recipe.demo.Enum.TypeEnum;
+import com.recipe.demo.dto.SearchDto;
+import com.recipe.demo.recipeTypeEnum.TypeEnum;
 import com.recipe.demo.dto.RecipeDto;
 import com.recipe.demo.entity.Recipe;
 import com.recipe.demo.service.RecipeServiceImpl;
@@ -69,7 +70,6 @@ public class SpringBootIntegrationTests {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string(equalTo("Recipe successfully updated.")));
-
     }
 
     @Test
@@ -78,6 +78,18 @@ public class SpringBootIntegrationTests {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string(equalTo("Recipe deleted successfully.")));
+    }
+
+    @Test
+    public void getRecipeBySearchIntegrationTest() throws Exception {
+        List<RecipeDto> myRecipes=new ArrayList<RecipeDto>();
+        myRecipes.add(new RecipeDto(1,"Biryani", TypeEnum.NON_VEG,2,"Rice, Masala","Make Biryani"));
+        myRecipes.add(new RecipeDto(2,"Pulao",TypeEnum.VEG,2,"Rice, Masala","Make Pulao"));
+        SearchDto s=new SearchDto(TypeEnum.VEG,2,"pasta",false,"bowl",true);
+        when(recipeService.getRecipeBySearch(s)).thenReturn(myRecipes);
+        mockMvc.perform(MockMvcRequestBuilders.post("/recipe/search").contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(s)))
+                .andDo(print())
+                .andExpect(status().isOk());
     }
 
     }

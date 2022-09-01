@@ -10,7 +10,7 @@ create table recipe(
 
    recipe_name varchar(50),
 
-   recipe_type varchar(20)NOT NULL,
+   recipe_type varchar(20),
 
    no_of_servings int,
 

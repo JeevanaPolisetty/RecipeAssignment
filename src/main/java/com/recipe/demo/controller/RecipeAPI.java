@@ -2,6 +2,7 @@ package com.recipe.demo.controller;
 
 import java.util.List;
 
+import com.recipe.demo.service.RecipeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -38,16 +39,9 @@ import org.slf4j.Logger;
 public class RecipeAPI {
 
 	@Autowired
-	private RecipeService recipeService;
-	@Autowired
-	private Environment environment;
+	RecipeService recipeService;
 	
 	Logger logger=LoggerFactory.getLogger(RecipeAPI.class);
-	
-	@Autowired
-	ObjectMapper mapper;
-
-
 
 	//API to READ a recipe
 	@Operation(summary = "Get recipes",description= "Get a list of recipes",tags="Get")
@@ -91,7 +85,7 @@ public class RecipeAPI {
 	@PostMapping(value = "/recipe",consumes="application/json")
 	public ResponseEntity<Recipe> addNewRecipe(@RequestBody RecipeDto recipe) throws RecipeException, JsonProcessingException {
 		Recipe r = recipeService.addNewRecipe(recipe);
-		logger.info("Added new recipe - "+ mapper.writeValueAsString(recipe));
+		logger.info("Added new recipe");
 		return new ResponseEntity<>(r, HttpStatus.CREATED);
 	}
 
@@ -107,7 +101,7 @@ public class RecipeAPI {
 	public ResponseEntity<String> updateRecipe(@PathVariable Integer recipeNo, @RequestBody RecipeDto recipe)
 			throws RecipeException {
 		recipeService.updateRecipe(recipeNo,recipe.getRecipeType());
-		String successMessage = environment.getProperty("API.UPDATED_SUCCESSFULLY");
+		String successMessage = "Recipe successfully updated.";
 		logger.info("Updated the recipe with id - "+recipeNo);
 		return new ResponseEntity<>(successMessage,HttpStatus.OK);
 	}
@@ -123,7 +117,7 @@ public class RecipeAPI {
 	    content = @Content) })
 	public ResponseEntity<String> deleteRecipe(@PathVariable Integer recipeNo) throws RecipeException {
 		recipeService.deleteRecipe(recipeNo);
-		String successMessage = environment.getProperty("API.DELETED_SUCCESSFULLY");
+		String successMessage ="Recipe deleted successfully.";
 		logger.info("Deleted the recipe with id - "+recipeNo);
 		return new ResponseEntity<>(successMessage, HttpStatus.OK);
 	}

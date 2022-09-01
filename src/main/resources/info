@@ -1,0 +1,23 @@
+Json to add recipe(Create method):
+{
+        "recipeName": "Pulao",
+        "recipeType": "VEG",
+        "noOfServings": 1,
+        "ingredients": "Rice, Vegetables, Water",
+        "instructions": "Saute the vegetables and add masala. Add water and semi-cooked rice.Cook for 10 minutes. "
+}
+
+Json to update recipe(Put method):
+{
+    "recipeType": "NON_VEG"
+}
+
+Json to implement Search functionality:
+{
+    "recipeType": "VEG",
+    "noOfServings": 2,
+    "ingredientInclude": false,
+    "ingredients": "pasta",
+    "instructionInclude":true,
+    "instructions": "bowl"
+}
