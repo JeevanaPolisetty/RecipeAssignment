@@ -46,7 +46,7 @@ public class RecipeServiceImpl implements RecipeService{
 	}
 
 	/**
-	 * Extracted method to remove duplicate code
+	 * Extracted method to set fields
 	 * @param recipe
 	 * @param recipe1
 	 */
@@ -67,11 +67,22 @@ public class RecipeServiceImpl implements RecipeService{
 	 */
 	@Override
 	public RecipeDto getRecipeById(Integer recipeNo) throws RecipeException {
-		Optional<Recipe> optional = recipeRepository.findById(recipeNo);
-		Recipe recipe = optional.orElseThrow(() -> new RecipeException("Service.RECIPE_NOT_FOUND"));
+		Recipe recipe = getRecipe(recipeNo);
 		RecipeDto recipe1 = new RecipeDto();
 		setFields(recipe, recipe1);
 		return recipe1;
+	}
+
+	/**
+	 * Extracted method to check findById null exception
+	 * @param recipeNo
+	 * @return
+	 * @throws RecipeException
+	 */
+	private Recipe getRecipe(Integer recipeNo) throws RecipeException {
+		Optional<Recipe> optional = recipeRepository.findById(recipeNo);
+		Recipe recipe = optional.orElseThrow(() -> new RecipeException("Service.RECIPE_NOT_FOUND"));
+		return recipe;
 	}
 
 	/**
@@ -101,9 +112,8 @@ public class RecipeServiceImpl implements RecipeService{
 	 */
 	@Override
 	public void updateRecipe(Integer recipeNo,TypeEnum recipeType) throws RecipeException {
-		Optional<Recipe> recipe1 = recipeRepository.findById(recipeNo);
-		Recipe recipe2 = recipe1.orElseThrow(() -> new RecipeException("Service.RECIPE_NOT_FOUND"));
-		recipe2.setRecipeType(recipeType);
+		Recipe recipe = getRecipe(recipeNo);
+		recipe.setRecipeType(recipeType);
 	}
 
 	/**
@@ -113,8 +123,7 @@ public class RecipeServiceImpl implements RecipeService{
 	 */
 	@Override
 	public void deleteRecipe(Integer recipeNo) throws RecipeException {
-		Optional<Recipe> recipe1 = recipeRepository.findById(recipeNo);
-		recipe1.orElseThrow(() -> new RecipeException("Service.RECIPE_NOT_FOUND"));
+		Recipe recipe = getRecipe(recipeNo);
 		recipeRepository.deleteById(recipeNo);
 	}
 

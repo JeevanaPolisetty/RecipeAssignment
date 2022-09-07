@@ -1,0 +1,283 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8765",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/recipe/{recipeNo}": {
+      "get": {
+        "tags": [
+          "Get"
+        ],
+        "summary": "Get specific recipe",
+        "description": "Get a recipe by id",
+        "operationId": "getRecipeById",
+        "parameters": [
+          {
+            "name": "recipeNo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Recipe not found"
+          },
+          "200": {
+            "description": "Found the recipe",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecipeDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Put"
+        ],
+        "summary": "Update recipe",
+        "description": "Update a recipe",
+        "operationId": "updateRecipe",
+        "parameters": [
+          {
+            "name": "recipeNo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecipeDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Updated the recipe",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecipeDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Recipe not updated"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Delete"
+        ],
+        "summary": "Delete recipe",
+        "description": "Delete a recipe",
+        "operationId": "deleteRecipe",
+        "parameters": [
+          {
+            "name": "recipeNo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Recipe not deleted"
+          },
+          "200": {
+            "description": "Deleted the recipe",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecipeDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recipe": {
+      "get": {
+        "tags": [
+          "Get"
+        ],
+        "summary": "Get recipes",
+        "description": "Get a list of recipes",
+        "operationId": "getAllRecipes",
+        "responses": {
+          "404": {
+            "description": "Recipes not found"
+          },
+          "200": {
+            "description": "Found the recipes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecipeDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Post"
+        ],
+        "summary": "Add recipe",
+        "description": "Add a new recipe",
+        "operationId": "addNewRecipe",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecipeDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Added the recipe",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecipeDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Recipe not added"
+          }
+        }
+      }
+    },
+    "/recipe/search": {
+      "post": {
+        "tags": [
+          "Post"
+        ],
+        "summary": "Search recipe",
+        "description": "Search a recipe based on given criteria",
+        "operationId": "getRecipeBySearch",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "404": {
+            "description": "Recipe not found"
+          },
+          "200": {
+            "description": "Found the recipe",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecipeDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RecipeDto": {
+        "type": "object",
+        "properties": {
+          "recipeNo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "recipeName": {
+            "type": "string"
+          },
+          "recipeType": {
+            "type": "string",
+            "enum": [
+              "VEG",
+              "NON_VEG"
+            ]
+          },
+          "noOfServings": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ingredients": {
+            "type": "string"
+          },
+          "instructions": {
+            "type": "string"
+          }
+        }
+      },
+      "SearchDto": {
+        "type": "object",
+        "properties": {
+          "recipeType": {
+            "type": "string",
+            "enum": [
+              "VEG",
+              "NON_VEG"
+            ]
+          },
+          "noOfServings": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ingredients": {
+            "type": "string"
+          },
+          "ingredientInclude": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "instructionInclude": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
+}
