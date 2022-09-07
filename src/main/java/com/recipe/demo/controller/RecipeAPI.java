@@ -43,7 +43,11 @@ public class RecipeAPI {
 	
 	Logger logger=LoggerFactory.getLogger(RecipeAPI.class);
 
-	//API to READ a recipe
+	/**
+	 * API to READ recipes
+	 * @return List of recipes
+	 * @throws RecipeException
+	 */
 	@Operation(summary = "Get recipes",description= "Get a list of recipes",tags="Get")
 	@ApiResponses(value = { 
 	  @ApiResponse(responseCode = "200", description = "Found the recipes", 
@@ -59,7 +63,12 @@ public class RecipeAPI {
 		return new ResponseEntity<>(recipeList, HttpStatus.OK);
 	}
 
-	//API to READ a recipe by given id
+	/**
+	 * API to READ a recipe by given id
+	 * @param recipeNo
+	 * @return recipe details
+	 * @throws RecipeException
+	 */
 	@Operation(summary = "Get specific recipe",description= "Get a recipe by id",tags="Get")
 	@ApiResponses(value = { 
 	  @ApiResponse(responseCode = "200", description = "Found the recipe", 
@@ -73,8 +82,13 @@ public class RecipeAPI {
 		RecipeDto recipe = recipeService.getRecipeById(recipeNo);
 		return new ResponseEntity<>(recipe, HttpStatus.OK);
 	}
-	
-	//API to CREATE a recipe
+
+	/**
+	 * API to CREATE a recipe
+	 * @param recipe
+	 * @return recipe details
+	 * @throws RecipeException
+	 */
 	@Operation(summary = "Add recipe",description= "Add a new recipe",tags="Post")
 	@ApiResponses(value = { 
 	  @ApiResponse(responseCode = "201", description = "Added the recipe",
@@ -83,13 +97,19 @@ public class RecipeAPI {
 	  @ApiResponse(responseCode = "404", description = "Recipe not added", 
 	    content = @Content) })
 	@PostMapping(value = "/recipe",consumes="application/json")
-	public ResponseEntity<Recipe> addNewRecipe(@RequestBody RecipeDto recipe) throws RecipeException, JsonProcessingException {
+	public ResponseEntity<Recipe> addNewRecipe(@RequestBody RecipeDto recipe) throws RecipeException{
 		Recipe r = recipeService.addNewRecipe(recipe);
 		logger.info("Added new recipe");
 		return new ResponseEntity<>(r, HttpStatus.CREATED);
 	}
 
-	//API to UPDATE a recipe
+	/**
+	 * API to UPDATE a recipe
+	 * @param recipeNo
+	 * @param recipe
+	 * @return String saying that recipe is successfully updated
+	 * @throws RecipeException
+	 */
 	@Operation(summary = "Update recipe",description= "Update a recipe",tags="Put")
 	@ApiResponses(value = { 
 	  @ApiResponse(responseCode = "200", description = "Updated the recipe", 
@@ -106,7 +126,12 @@ public class RecipeAPI {
 		return new ResponseEntity<>(successMessage,HttpStatus.OK);
 	}
 
-	//API to DELETE a recipe
+	/**
+	 * API to DELETE a recipe
+	 * @param recipeNo
+	 * @return String saying that recipe is deleted successfully
+	 * @throws RecipeException
+	 */
 	@DeleteMapping(value = "/recipe/{recipeNo}")
 	@Operation(summary = "Delete recipe",description= "Delete a recipe",tags="Delete")
 	@ApiResponses(value = { 
@@ -122,7 +147,12 @@ public class RecipeAPI {
 		return new ResponseEntity<>(successMessage, HttpStatus.OK);
 	}
 
-	//API to SEARCH a recipe based on given criteria
+	/**
+	 * API to SEARCH a recipe based on given criteria
+	 * @param recipe
+	 * @return List of recipes which matched the requirements
+	 * @throws RecipeException
+	 */
 	@Operation(summary = "Search recipe",description= "Search a recipe based on given criteria",tags="Post")
 	@ApiResponses(value = { 
 	  @ApiResponse(responseCode = "200", description = "Found the recipe", 

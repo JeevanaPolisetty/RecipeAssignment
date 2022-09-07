@@ -31,6 +31,11 @@ public class SpringBootIntegrationTests {
     RecipeServiceImpl recipeService;
     @Autowired
     ObjectMapper mapper;
+
+    /**
+     * Integration test for getAll method
+     * @throws Exception
+     */
     @Test
     public void getAllRecipesIntegrationTest() throws Exception {
         List<RecipeDto> myRecipes=new ArrayList<RecipeDto>();
@@ -43,6 +48,10 @@ public class SpringBootIntegrationTests {
                 .andExpect(content().string(equalTo(mapper.writeValueAsString(myRecipes))));
     }
 
+    /**
+     * Integration test for get method
+     * @throws Exception
+     */
     @Test
     public void getRecipeByIdIntegrationTest() throws Exception {
         RecipeDto recipeDto=new RecipeDto(1,"Biryani", TypeEnum.NON_VEG,4,"Rice, Masala","Make Biryani");
@@ -53,6 +62,10 @@ public class SpringBootIntegrationTests {
                 .andExpect(content().string(equalTo(mapper.writeValueAsString(recipeDto))));
     }
 
+    /**
+     * Integration test for create method
+     * @throws Exception
+     */
     @Test
     public void addNewRecipeIntegrationTest() throws Exception {
         RecipeDto recipeDto=new RecipeDto("Biryani", TypeEnum.NON_VEG,4,"Rice, Masala","Make Biryani");
@@ -63,6 +76,10 @@ public class SpringBootIntegrationTests {
                 .andExpect(status().isCreated());
     }
 
+    /**
+     * Integration test for update method
+     * @throws Exception
+     */
     @Test
     public void updateRecipeIntegrationTest() throws Exception {
         RecipeDto recipeDto=new RecipeDto(1,"Biryani", TypeEnum.NON_VEG,4,"Rice, Masala","Make Biryani");
@@ -72,6 +89,10 @@ public class SpringBootIntegrationTests {
                 .andExpect(content().string(equalTo("Recipe successfully updated.")));
     }
 
+    /**
+     * Integration test for delete method
+     * @throws Exception
+     */
     @Test
     public void deleteRecipeIntegrationTest() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.delete("/recipe/1"))
@@ -80,6 +101,10 @@ public class SpringBootIntegrationTests {
                 .andExpect(content().string(equalTo("Recipe deleted successfully.")));
     }
 
+    /**
+     * Integration test for filter method
+     * @throws Exception
+     */
     @Test
     public void getRecipeBySearchIntegrationTest() throws Exception {
         List<RecipeDto> myRecipes=new ArrayList<RecipeDto>();

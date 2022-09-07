@@ -5,6 +5,10 @@ import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Dto class for recipe
+ */
+
 @Getter
 @Setter
 public class RecipeDto {

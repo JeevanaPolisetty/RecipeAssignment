@@ -14,7 +14,9 @@ import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-
+/**
+ * Entity class for recipe
+ */
 @Entity
 @Table(name="recipe")
 @Getter

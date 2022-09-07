@@ -4,6 +4,9 @@ import com.recipe.demo.recipeTypeEnum.TypeEnum;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Dto class to specify search criteria
+ */
 @Getter
 @Setter
 public class SearchDto {

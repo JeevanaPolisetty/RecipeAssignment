@@ -8,6 +8,9 @@ import com.recipe.demo.dto.SearchDto;
 import com.recipe.demo.entity.Recipe;
 import com.recipe.demo.exception.RecipeException;
 
+/**
+ * Interface for service methods
+ */
 public interface RecipeService {
 
 	List<RecipeDto> getAllRecipes()throws RecipeException;

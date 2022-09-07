@@ -24,8 +24,12 @@ public class RecipeServiceImpl implements RecipeService{
 
 	@Autowired
 	RecipeRepository recipeRepository;
-	
-	//Read all 
+
+	/**
+	 * Fetches all recipes
+ 	 * @return List of recipes
+	 * @throws RecipeException
+	 */
 	@Override
 	public List<RecipeDto> getAllRecipes() throws RecipeException {
 		Iterable<Recipe> recipeDetails = recipeRepository.findAll();
@@ -41,7 +45,11 @@ public class RecipeServiceImpl implements RecipeService{
 		
 	}
 
-	//Extracted method to remove duplicate code
+	/**
+	 * Extracted method to remove duplicate code
+	 * @param recipe
+	 * @param recipe1
+	 */
 	private void setFields(Recipe recipe, RecipeDto recipe1) {
 		recipe1.setRecipeNo(recipe.getRecipeNo());
 		recipe1.setRecipeName(recipe.getRecipeName());
@@ -50,8 +58,13 @@ public class RecipeServiceImpl implements RecipeService{
 		recipe1.setIngredients(recipe.getIngredients());
 		recipe1.setInstructions(recipe.getInstructions());
 	}
-	
-	//Read based on recipe id
+
+	/**
+	 * Fetches recipe based on recipe id
+	 * @param recipeNo
+	 * @return recipe details
+	 * @throws RecipeException
+	 */
 	@Override
 	public RecipeDto getRecipeById(Integer recipeNo) throws RecipeException {
 		Optional<Recipe> optional = recipeRepository.findById(recipeNo);
@@ -60,8 +73,13 @@ public class RecipeServiceImpl implements RecipeService{
 		setFields(recipe, recipe1);
 		return recipe1;
 	}
-	
-	//Create
+
+	/**
+	 * Creates new recipe
+	 * @param recipe
+	 * @return recipe details
+	 * @throws RecipeException
+	 */
 	@Override
 	public Recipe addNewRecipe(RecipeDto recipe) throws RecipeException {
 		Recipe recipe1 = new Recipe();
@@ -74,8 +92,13 @@ public class RecipeServiceImpl implements RecipeService{
 		Recipe newRecipe = recipeRepository.save(recipe1);
 		return newRecipe;
 	}
-	
-	//Update
+
+	/**
+	 * Updates the recipe type
+	 * @param recipeNo
+	 * @param recipeType
+	 * @throws RecipeException
+	 */
 	@Override
 	public void updateRecipe(Integer recipeNo,TypeEnum recipeType) throws RecipeException {
 		Optional<Recipe> recipe1 = recipeRepository.findById(recipeNo);
@@ -83,7 +106,11 @@ public class RecipeServiceImpl implements RecipeService{
 		recipe2.setRecipeType(recipeType);
 	}
 
-	//Delete
+	/**
+	 * Deletes the recipe based on recipe id
+	 * @param recipeNo
+	 * @throws RecipeException
+	 */
 	@Override
 	public void deleteRecipe(Integer recipeNo) throws RecipeException {
 		Optional<Recipe> recipe1 = recipeRepository.findById(recipeNo);
@@ -91,7 +118,12 @@ public class RecipeServiceImpl implements RecipeService{
 		recipeRepository.deleteById(recipeNo);
 	}
 
-    //Search 
+	/**
+	 * Searches the recipes based on given criteria
+	 * @param recipe
+	 * @return list of recipes that match the criteria
+	 * @throws RecipeException
+	 */
 	@Override
 	public List<RecipeDto> getRecipeBySearch(SearchDto recipe) throws RecipeException {
 		Iterable<Recipe> recipeDetails = recipeRepository.findAll();
